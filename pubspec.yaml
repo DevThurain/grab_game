@@ -23,6 +23,9 @@ dependencies:
   build_runner: ^2.1.5
   dartz: ^0.10.1
   dio: ^4.0.4
+  flutter_bloc: ^8.0.1
+  get_it: ^7.2.0
+
 
 
 

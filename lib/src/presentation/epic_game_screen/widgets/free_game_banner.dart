@@ -3,13 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:grab_games/src/constants/app_dimens.dart';
 import 'package:grab_games/src/constants/app_fonts.dart';
+import 'package:grab_games/src/models/free_game_vo.dart';
 import 'package:grab_games/src/presentation/global/release_year_chip.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
 class FreeGameBanner extends StatefulWidget {
-  const FreeGameBanner({
-    Key? key,
-  }) : super(key: key);
+  final FreeGameVO freeGameVO;
+
+  FreeGameBanner({required this.freeGameVO});
 
   @override
   State<FreeGameBanner> createState() => _FreeGameBannerState();
@@ -28,7 +29,7 @@ class _FreeGameBannerState extends State<FreeGameBanner> with AutomaticKeepAlive
             child: ClipRRect(
               borderRadius: BorderRadius.circular(AppDimens.margin_medium_2x),
               child: Image.network(
-                'https://www.posterposse.com/wp-content/uploads/2018/06/God-Of-War-banner.jpeg',
+                widget.freeGameVO.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -54,16 +55,21 @@ class _FreeGameBannerState extends State<FreeGameBanner> with AutomaticKeepAlive
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'God Of War',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: AppFonts.poppins,
-                                    fontSize: AppDimens.text_regular_1x,
-                                    fontWeight: FontWeight.w400),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Text(
+                                  widget.freeGameVO.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: AppFonts.poppins,
+                                      fontSize: AppDimens.text_regular_1x,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ),
                               SizedBox(height: AppDimens.margin_small),
-                              ReleaseYearChip(year: '2018'),
+                              // ReleaseYearChip(year: '2018'),
                             ],
                           ),
                         ),
@@ -73,7 +79,7 @@ class _FreeGameBannerState extends State<FreeGameBanner> with AutomaticKeepAlive
                         child: Padding(
                           padding: const EdgeInsets.only(right: AppDimens.margin_medium),
                           child: SlideCountdown(
-                            duration: const Duration(days: 2),
+                            duration: widget.freeGameVO.timeRemaining,
                           ),
                         ),
                       )
@@ -92,4 +98,3 @@ class _FreeGameBannerState extends State<FreeGameBanner> with AutomaticKeepAlive
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
-
