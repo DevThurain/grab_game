@@ -15,13 +15,14 @@ class DiscountGameRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppDimens.margin_medium),
+      padding: const EdgeInsets.symmetric(vertical: AppDimens.margin_medium,horizontal: AppDimens.margin_medium_3x),
       child: InkWell(
         borderRadius: BorderRadius.circular(AppDimens.margin_medium_2x),
         onTap: () {},
         child: SizedBox(
           width: double.infinity,
           height: AppDimens.height_percentage_off_game_row,
+          
           child: Stack(
             children: [
               Row(

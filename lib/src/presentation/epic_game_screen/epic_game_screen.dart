@@ -46,7 +46,6 @@ class _EpicGameScreenState extends State<EpicGameScreen> {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: AppDimens.margin_medium_3x),
               child: ListView.builder(
                 itemCount: 5,
                 itemBuilder: (context, index) {

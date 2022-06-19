@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  var _pageController = PageController();
 
   final _navBarItems = [
     NavigationDestination(
@@ -38,13 +39,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: PageView(
+        controller: _pageController,
+        // itemCount: _screens.length,
+        // itemBuilder: ((context, index) => _screens[_selectedIndex]),
+        children: [EpicGameScreen(), SteamScreen(), NotificationScreen()],
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
       bottomNavigationBar: NavigationBar(
         animationDuration: const Duration(seconds: 1),
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
           setState(() {
             _selectedIndex = index;
+            debugPrint(index.toString());
+             _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
           });
         },
         destinations: _navBarItems,
